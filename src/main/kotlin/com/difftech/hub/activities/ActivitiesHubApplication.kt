@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
@@ -25,6 +26,9 @@ interface MessageRepository : CrudRepository<Message, String> {
 
 	@Query("select * from messages")
 	fun findMessages(): List<Message>
+
+	@Query("select * from messages m where m.author = :author")
+	fun findMessagesOfAuthor(@Param("author") authorId: String): List<Message>
 }
 
 @Service
@@ -42,6 +46,8 @@ class AuthorService(val db: AuthorRepository) {
 class MessageService(val db: MessageRepository) {
 
 	fun findMessages(): List<Message> = db.findMessages()
+
+	fun findMessagesOfAuthor(author: String?): List<Message> = if (author != null) db.findMessagesOfAuthor(author) else findMessages()
 
 	fun post(message: Message) {
 		db.save(message)
@@ -62,11 +68,8 @@ class AuthorNotFoundException(msg: String) : RuntimeException(msg)
 
 @RestController
 class MessageResource(val msgService: MessageService, val authorService: AuthorService) {
-  @GetMapping("messages")
-  fun getMessages(): List<Message> = msgService.findMessages()
-
 	@GetMapping("messages")
-	fun getAuthorMessages(@RequestParam author: String?): List<Message>
+	fun getAuthorMessages(@RequestParam author: String?): List<Message> = msgService.findMessagesOfAuthor(author)
 
   @PostMapping(path= ["messages"],
 		  consumes = [MediaType.APPLICATION_JSON_VALUE],
