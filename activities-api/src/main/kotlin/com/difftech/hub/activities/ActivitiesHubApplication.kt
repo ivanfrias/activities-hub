@@ -2,18 +2,15 @@ package com.difftech.hub.activities
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.relational.core.mapping.Column
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.jdbc.repository.query.Query
+import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.stereotype.Controller
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 interface AuthorRepository : CrudRepository<Author, String> {
 
