@@ -22,9 +22,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>activities-hub</name>
 	<description>Calendar Activities hub integration</description>
+
 	<properties>
 		<java.version>16</java.version>
 		<kotlin.version>1.5.21</kotlin.version>
+		<junit.version>5.7.2</junit.version>
+		<google.api.version>1.32.1</google.api.version>
 	</properties>
 
 	<repositories>
@@ -42,6 +45,13 @@
 			<url>https://repo.spring.io/snapshot</url>
 			<releases>
 				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
 			</releases>
 		</repository>
 	</repositories>
@@ -62,5 +72,13 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
+		<pluginRepository>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
 	</pluginRepositories>
+
 </project>
